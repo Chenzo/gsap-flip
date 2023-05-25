@@ -1,5 +1,5 @@
 import styles from "./GSAPTest1.module.scss";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import Flip from "gsap/Flip";
 
@@ -7,6 +7,8 @@ export default function GSAPTest1() {
   
     const [callout, setCallout] = useState("");
     const square = useRef();
+    const circle = useRef();
+    const spinBox = useRef();
     gsap.registerPlugin(Flip);
     const squares = gsap.utils.toArray(square.current);  
 
@@ -35,6 +37,18 @@ export default function GSAPTest1() {
         gsap.to(currentTarget, { backgroundColor: "#28a92b", scale: 1 });
     };
 
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+          // use scoped selectors
+          gsap.to(".box", { rotation: 360 });
+          // or refs
+          gsap.to(circle.current, { rotation: 360 });
+          
+        }, spinBox);
+        
+        return () => ctx.revert();
+      }, []);
+
     useEffect(() => {
         console.log("ready");  
         document.addEventListener("click", doFlip);
@@ -50,6 +64,12 @@ export default function GSAPTest1() {
 
             <div className={styles.box} onMouseEnter={onEnter} onMouseLeave={onLeave}>
                 Hover Me
+            </div>
+
+
+            <div ref={spinBox} className={styles.spinBox}>
+                <div className={`${styles.boxy} box`}>selector</div>
+                <div className={styles.circle} ref={circle}>Ref</div>
             </div>
         </>
   );
