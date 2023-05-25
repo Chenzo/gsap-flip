@@ -51,7 +51,7 @@ export default function GSAPTest1() {
 
     useEffect(() => {
         console.log("ready");  
-        document.addEventListener("click", doFlip);
+        //document.addEventListener("click", doFlip);
     }, []);
  
   return (

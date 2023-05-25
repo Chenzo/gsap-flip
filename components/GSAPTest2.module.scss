@@ -1,0 +1,21 @@
+
+.container {
+    display: flex;
+    background: #222;
+
+    &.plain {
+        .letter {
+            padding: 10px;
+            font-size: 30px;
+        }
+    }
+
+    &.tall {
+        .letter {
+            padding: 40px 20px;
+            font-size: 50px;
+        }
+    }
+}
+  
+  

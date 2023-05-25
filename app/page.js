@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { useEffect, useState } from "react";
 
 import GSAPTest1 from '@/components/GSAPTest1';
+import GSAPTest2 from '@/components/GSAPTest2';
 
 export default function Home() {
 
@@ -34,6 +35,8 @@ export default function Home() {
 
       <div className={styles.testspace}>
           <GSAPTest1 />
+
+          <GSAPTest2 />
       </div>
 
 
