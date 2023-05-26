@@ -15,6 +15,8 @@ https://greensock.com/docs/v3/Installation?checked=core,flip#CDN
 
 https://greensock.com/react-basics/
 
+https://cdnjs.com/libraries/gsap
+
 
 
 ```
