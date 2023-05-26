@@ -16,7 +16,7 @@ export default function GSAPTest1() {
     function doFlip() {
         // Get the initial state
         const state = Flip.getState(squares);
-        console.log(state);
+        //console.log(state);
         swap(squares);
         Flip.from(state, {duration: 2, ease: "power1.inOut"});
     }
