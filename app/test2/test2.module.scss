@@ -1,0 +1,48 @@
+/* input[type="checkbox"] {
+    cursor: pointer;
+  } */
+
+  .main {
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+  }
+  
+  .form-check-label {
+    cursor: pointer;
+  }
+  
+  .boxContainer {
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .filterContainer {
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .filter_element {
+    display: inline-flex;
+    width: 200px;
+    height: 150px;
+    margin: 5px;
+  }
+  
+  .orange {
+    background-color: #f38630;
+  }
+  .green {
+    background-color: #6fb936;
+  }
+  .purple {
+    background-color: #7d4696;
+  }
