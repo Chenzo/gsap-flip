@@ -85,6 +85,14 @@ export default function FilterTest() {
         el.style.display = filter.indexOf(el.dataset.color) === -1 ? "none" : "inline-flex";
       }); 
     }
+    Flip.from(state, {
+      duration: 1,
+      scale: true,
+      absolute: true,
+      ease: "power1.inOut",
+      onEnter: elements => gsap.fromTo(elements, {opacity: 0, scale: 0}, {opacity: 1, scale: 1, duration: 1}),
+      onLeave: elements => gsap.to(elements, {opacity: 0, scale: 0, duration: 1})
+    });
 
   }, [filter]);
 
