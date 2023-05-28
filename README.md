@@ -8,6 +8,20 @@ https://chenzo.github.io/gsap-flip/
 
 
 
+-----------
+
+Simple HTML example that function:
+https://chenzo.github.io/gsap-flip/simple.html
+
+react version of the thing above:   
+https://chenzo.github.io/gsap-flip/test1 
+
+
+
+
+
+
+
 
 
 
