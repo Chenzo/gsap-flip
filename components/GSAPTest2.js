@@ -3,7 +3,9 @@ import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import Flip from "gsap/Flip";
 
-export default function GSAPTest1() {
+gsap.registerPlugin(Flip);
+
+export default function GSAPTest2() {
   
     gsap.registerPlugin(Flip);
     const [callout, setCallout] = useState("");
@@ -12,62 +14,54 @@ export default function GSAPTest1() {
 
 
     const container = useRef();
-    const letter = useRef();
-    const [isReorder, setisReorder] = useState(false);
+    const letter = useRef([]);
+    const [flip, setFlip] = useState(false);
 
     const toggleIt = () => {
         console.log("toggleIt");
-        const state = Flip.getState(container.current, letter.current);
-        setStyleType(styleType === styles.plain ? styles.tall : styles.plain);
+        setFlip(!flip)
+    }
+
+    useEffect(() => {
+        const state = Flip.getState(letter.current, {
+            props: "backgroundColor, color, fontSize"
+        });
+    
+        if (flip) {
+            container.current.classList.remove(styles.plain);
+            container.current.classList.add(styles.tall);
+        } else {
+            container.current.classList.add(styles.plain);
+            container.current.classList.remove(styles.tall);
+        }
+
         Flip.from(state, {
-            absolute: true, // uses position: absolute during the flip to work around flexbox challenges
-            duration: 1, 
+            duration: 1,
             stagger: 0.1,
-            ease: "power1.inOut"
-            // you can use any other tweening properties here too, like onComplete, onUpdate, delay, etc. 
+            ease: "power1.inOut",
+            //onEnter: elements => gsap.fromTo(elements, {opacity: 0, scale: 0}, {opacity: 1, scale: 1, duration: 1}),
+            //onLeave: elements => gsap.to(elements, {opacity: 0, scale: 0, duration: 1})
           });
-    }
-
-
-    const changeLayout = () => {
-        console.log("changeLayout");
-
-        
-        const state = Flip.getState(".group, .box");
-        setisReorder(!isReorder);
-        Flip.from(state, {
-            absolute: true, // uses position: absolute during the flip to work around flexbox challenges
-            duration: 0.5, 
-            stagger: 0.1,
-            ease: "power1.inOut"
-            // you can use any other tweening properties here too, like onComplete, onUpdate, delay, etc. 
-          }); 
-    }
+    
+      }, [flip]);
  
   return (
         <>
         <button className={styles.button} onClick={toggleIt}>toggle</button>
 
-            <div ref={container} className={`${styles.container} ${styleType}`}>
-                <div ref={letter} className={`${styles.letter} ${styles.c}`}>C</div>
-                <div ref={letter} className={`${styles.letter} ${styles.h}`}>H</div>
-                <div ref={letter} className={`${styles.letter} ${styles.e}`}>E</div>
-                <div ref={letter} className={`${styles.letter} ${styles.n}`}>N</div>
-                <div ref={letter} className={`${styles.letter} ${styles.z}`}>Z</div>
-                <div ref={letter} className={`${styles.letter} ${styles.o}`}>O</div>
+            <div className={styles.amimationHolder}>
+
+                <div ref={container} className={`${styles.container} ${styles.plain}`}>
+                    <div ref={(el) => (letter.current[0] = el)}  className={`${styles.letter} ${styles.c}`}>C</div>
+                    <div ref={(el) => (letter.current[1] = el)} className={`${styles.letter} ${styles.h}`}>H</div>
+                    <div ref={(el) => (letter.current[2] = el)} className={`${styles.letter} ${styles.e}`}>E</div>
+                    <div ref={(el) => (letter.current[3] = el)} className={`${styles.letter} ${styles.n}`}>N</div>
+                    <div ref={(el) => (letter.current[4] = el)} className={`${styles.letter} ${styles.z}`}>Z</div>
+                    <div ref={(el) => (letter.current[5] = el)} className={`${styles.letter} ${styles.o}`}>O</div>
+                </div>
+
             </div>
 
-            
-
-            <button id="changeLayout" className={styles.button} onClick={changeLayout}>change</button>
-            <div className={`group ${styles.group} ${isReorder ? styles.reorder : ""}`}>
-                <div className={`box ${styles.box}`}>Common "FLIP" techniques employed by other tools won't work with flex elements because of the way browsers handle width/height. 
-                </div>
-                <div className={`box ${styles.box}`}>Simply set <code>absolute: true</code> to have GSAP's Flip plugin make the elements position: absolute during the flip to work around challenges with flex and grid layouts. 
-                </div>
-                <div className={`box ${styles.box}`}>When the flip animation is done, elements get reverted back to their normal positioning and everything appears seamless.</div>
-                <div className={`box ${styles.box}`}>Happy flipping!</div>
-            </div>
         </>
   );
 }

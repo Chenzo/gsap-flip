@@ -82,7 +82,14 @@ export default function FilterTest() {
 
     if (elementRefs) {
       elementRefs.current.forEach((el) => {
-        el.style.display = filter.indexOf(el.dataset.color) === -1 ? "none" : "inline-flex";
+        //el.style.display = filter.indexOf(el.dataset.color) === -1 ? "none" : "inline-flex";
+        console.log(el.classList);
+        if (filter.indexOf(el.dataset.color) === -1) {
+          el.classList.add(styles.hidden);
+        } else {
+          el.classList.remove(styles.hidden);
+        }
+        //console.log(styles.hidden);
       }); 
     }
     Flip.from(state, {

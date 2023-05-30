@@ -35,6 +35,11 @@
     width: 200px;
     height: 150px;
     margin: 5px;
+    opacity: 1;
+
+    &.hidden {
+        display: none;
+    }
   }
   
   .orange {
